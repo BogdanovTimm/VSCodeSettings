@@ -1,0 +1,1079 @@
+{
+    //? Place your snippets for java here. Each snippet is defined under a snippet name and has a prefix, body and 
+    //? description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    //? $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+    //? same ids are connected.
+    //? Example:
+    //? "Print to console": {
+    //? 	"prefix": "log",
+    //? 	"body": [
+    //? 		"console.log('$1');",
+    //? 		"$2"
+    //? 	],
+    //? 	"description": "Log output to console"
+    //? }
+
+    
+
+    // Standard Java --v
+    "Create clone() method": {
+        "prefix": "createCloneMethod",
+         "body": [
+            "//[ ] Implement Cloneable Interface in this class (ClassToClone)"
+            "@Override"
+            "protected Object clone() {"
+            "    ClassToClone newObject = null;"
+            "    try {"
+            "    newObject = (ClassToClone) super.clone();"
+            "    } catch (CloneNotSupportedException exception) {"
+            "    newObject = new ClassToClone(this.intVariable, this.stringVariable, this.customClassVariable, this.arrayOfInts); //[ ] Chreate new instance of ClassToClone by hand, if super.clone doesn't work"
+            "    }"
+            "    newObject.customClassVariable = (CustomClass)this.customClassVariable.clone(); //[ ] Do this for every mutable class (inicluding Collections)"
+            "    newObject.arrayOfInts = this.arrayOfInts.clone(); //[ ] Do this for every mutable class (inicluding Collections)"
+            "    return newObject;"
+            "}"
+         ],
+         "description": "Create clone() method"
+    },
+    // Standard Java --^
+
+
+
+    // Exception --v
+    "Create custom Exception or RuntimeException": {
+        "prefix": "createCustomException",
+         "body": [
+            "public class CustomException extends /*Runtime*/Exception { //[ ] Define whether it will be Exception (checked) or RuntimeException (unchecked)"
+            "    public CustomException(String errorMessage) {"
+            "        super(errorMessage);"
+            "    }"
+            "    public CustomException(String errorMessage, Throwable err) {"
+            "    super(errorMessage, err);"
+            "    }"
+            "}"
+            "/*"
+            "//?Example of a method that uses this CustomException --v"
+            "public void customMethod(int parameter) throws CustomException {"
+            "    if (parameter <= 0) {"
+            "        throw new CustomException(\"Exception description\");"
+            "    }"
+            "}"
+            "//?Example of a method that uses this CustomException --^"
+            "*/"
+         ],
+         "description": "Create custom Exception or RuntimeException"
+    },
+    // Exception --^
+
+
+    // Immutable Class --v
+    "Make Class Immutable": {
+        "prefix": "makeClassImmutable",
+         "body": [
+             "final class Immutable { //[ ] Make Class final"
+             "    private final int immutableInt;"
+             "    private final List<Integer> mutableList;"
+             ""
+             "    public Immutable(int immutableInt, List<Integer> immutableList) {"
+             "        this.immutableInt = immutableInt;"
+             "        this.immutableList = List.copyOf(immutableList); //[ ] You need to deep copy all mutable classes (uncluding Collections)"
+             "    }"
+             ""
+             "    public List<Integer> getImmutableList() {"
+             "        return immutableList;"
+             "    }"
+             "    public int getImmutableInt() {"
+             "        return immutableInt;"
+             "    }"
+             ""
+             "    //[ ] No setter methods"
+             "}"
+         ],
+         "description": "Make Class Immutable"
+    },
+    // Immutable Class Java --^
+
+
+
+    //? Files --v
+    "Create File if not exist, replace content with given": {
+        "prefix": "replaceContentOfFileWithGiven",
+         "body": [
+            "Files.write (Path.of (\"%folder_name%\",",
+            "                      \"%folder_name2%\",",
+            "                      \"file_folders_to_which_exist_name%.%extension%\"),",
+            "             ArrayOfBytesOrCollectionOfStrings);"
+         ],
+         "description": "Create File if not exist, replace content with given"
+    },
+    "Create File if not exist, add content to the end of file": {
+        "prefix": "addArrayOfBytesOrCollectionOfStringsToEndOfFile",
+         "body": [
+            "Files.write (Path.of (\"%folder_name%\",",
+            "                      \"%folder_name2%\",",
+            "                      \"file_folders_to_which_exist_name%.%extension%\"),",
+            "             ArrayOfBytesOrCollectionOfStrings,",
+            "             StandardOpenOption.APPEND,",
+            "             StandardOpenOption.CREATE);"
+         ],
+         "description": "Create File if not exist, add Array of Bytes or Collection of Strings to end of File"
+    },
+    "Add 1 String to end of File": {
+        "prefix": "addStringToEndOfFile",
+         "body": [
+            "Files.writeString (Path.of (\"%file_folders_to_which_exist_name%.%extension%\"),",
+            "                   \"%Text to add%\");"
+         ],
+         "description": "Add 1 String to end of File"
+    },
+    "Read String Text File By Lines": {
+        "prefix": "readStringTextFileByLines",
+         "body": [
+            "try (Stream<String> streamOfLinesFromFile = Files.lines (Path.of (\"file_folders_to_which_exist_name%.%extension%\"))) {",
+            "    streamOfLinesFromFile.forEach (System.out::println);",
+            "}"
+         ],
+         "description": "Read String Text File By Lines"
+    },
+    "Read String Text File By Words": {
+        "prefix": "readStringTextFileByWords",
+         "body": [
+            "try (var scanner1 = new Scanner (\"%file_folders_to_which_exist_name%.%extension%\")) {",
+            "    while (scanner1.hasNext ()) {",
+            "        var currentWord = scanner1.next ();",
+            "        System.out.println (currentWord);",
+            "    }",
+            "}"
+         ],
+         "description": "Read String Text File By Words"
+    },
+    "Create Random Array Of Bytes": {
+        "prefix": "createRandomArrayOfBytes",
+         "body": [
+            "byte[] arrayOfBytesName = new byte[20];",
+            "new Random ().nextBytes (arrayOfBytesName);"
+         ],
+         "description": "Create Random Array Of Bytes"
+    },
+    "Create Secure Random Array Of Bytes": {
+        "prefix": "createSecureRandomArrayOfBytes",
+         "body": [
+            "byte[] arrayOfBytesName = new byte[20];",
+            "SecureRandom.getInstanceStrong ().nextBytes (arrayOfBytesName);"
+         ],
+         "description": "Create Secure Random Array Of Bytes"
+    },
+    "Create File": {
+        "prefix": "createFile",
+         "body": [
+            "var pathToFileName = Path.of (\"%folder_name%\",",
+            "                              \"%folder_name2%\",",
+            "                              \"%file_name%.%extension%\")",
+            "                         .toFile ();",
+            "pathToFileName.createNewFile ();"
+         ],
+         "description": "Create File if not exist, otherwise do nothing"
+    },
+    "Create Folder": {
+        "prefix": "createFolder",
+         "body": [
+            "var pathToFolderName = Path.of (\"%folder_name%\",",
+                                                    "\"%folder_name2%\",",
+                                                    "\"%folder_name3%\")",
+                                               ".toFile ();",
+            "pathToFolderName.mkdirs ();"
+         ],
+         "description": "Create Folder if not exist, otherwise do nothing"
+    },
+    "Copy Content of File as Array of Bytes": {
+        "prefix": "copyContentOfFileAsArrayOfBites",
+         "body": [
+            "try (var bufferedInputStream1 = new BufferedInputStream (new FileInputStream (Path.of (\"file_folders_to_which_exist_name%.%extension%\")",
+            "                                                                                  .toFile ())))",
+            "{",
+            "    byte[] copyOfContentOfFile = new byte[bufferedInputStream1.available ()];",
+            "    var currentNumberOfByte = 0;",
+            "    byte currentByte;",
+            "    while ((currentByte = (byte) bufferedInputStream1.read ()) != -1)",
+            "    {",
+            "        copyOfContentOfFile[currentNumberOfByte++] = currentByte;",
+            "    }",
+            "}",
+         ],
+         "description": "Copy Content of File as Array of Bytes"
+    },
+    "Create Serializable Class": {
+        "prefix": "createSerializableClass",
+         "body": [
+             "class SerializableClass implements Serializable {",
+             "    /**",
+             "    * Between serialization and deserialization the code of the Class can be changed.",
+             "    * To be able to finish deserialization, you need to explicit create an ID of a version of a Class.",
+             "    */",
+             "    private static final long serialVersionUID = 1L;",
+             "    int variable1;",
+             "    /**",
+             "    * Because of [transient], value of this variable will lost during serialization/deserialization",
+             "    */",
+             "    transient String variable2;",
+             "    SerializableClass (int variable1, String variable2) {",
+             "        this.variable1 = variable1;",
+             "        this.variable2 = variable2;",
+             "    }",
+             "}"
+         ],
+         "description": "Create Serializable Class"
+    },
+    "Serialization of given Java Object": {
+        "prefix": "serializationOfJavaObject",
+         "body": [
+             "try (var objectOutputStream = new ObjectOutputStream (new FileOutputStream (Path.of (\"%file_name%.%extension%\").toFile ()))) {",
+             "    objectOutputStream.writeObject (serializableClass1); //? Serializable Class must implement Serializable",
+             "}"
+         ],
+         "description": "Serialization of given Java Object"
+    },
+    "Deserialization of": {
+        "prefix": "deserializationOf",
+         "body": [
+             "try (var objectInputStream = new ObjectInputStream (new FileInputStream (Path.of (\"%file_name%.%extension%\").toFile ()))) {",
+             "    var deserializedJavaObject = objectInputStream.readObject (); //? Serializable Class must implement Serializable",
+             "}"
+         ],
+         "description": "Deserialization of"
+    },
+    //? Files --^
+
+
+
+    //? Console Input --v
+    "User's Console Input Field Parsed As Words": {
+        "prefix": "userConsoleInputFieldParsedAsWords",
+         "body": [
+           "Scanner userConsoleInputField = new Scanner (System.in);",
+           "while (true) {",
+            "    String currentWord = userConsoleInputField.nextLine ();",
+            "    System.out.println (currentWord);",
+            "}"
+         ],
+         "description": "User's Console Input Field Parsed As Words"
+    },
+    "User's Console Input Field Parsed As Lines": {
+        "prefix": "userConsoleInputFieldParsedAsLines",
+         "body": [
+           "BufferedReader userConsoleInputField = new BufferedReader (new InputStreamReader (System.in));",
+           "while (true) {",
+            "    String currentLine = userConsoleInputField.readLine ();",
+            "    System.out.println (currentLine);",
+            "}"
+         ],
+         "description": "User's Console Input Field Parsed As Lines"
+    },
+    //? Console Input --^
+
+
+
+    //? String --v
+    "Mutable String Thread-Safe": {
+        "prefix": "mutableStringThreadSafe",
+         "body": [
+           "var stringBuffer = new StringBuffer ();",
+           "stringBuffer.append (\"%Your Text%\");"
+         ],
+         "description": "Mutable String Thread-Safe"
+    },
+    //? String --^
+
+
+
+    //? Stream --v
+    "Create Parallel Stream": {
+        "prefix": "createParallelStream",
+         "body": [
+             "Stream.of (1, 2, 3)",
+             "      .parallel ();",
+         ],
+         "description": "Create Parallel (Multy-Threaded) Stream"
+    },
+    "Create Stream": {
+        "prefix": "createStream",
+         "body": [
+             "Stream.of (1, 2, 3)",
+             "      .sequential ();",
+         ],
+         "description": "Create Stream"
+    },
+    "Stream: find largest Integer": {
+        "prefix": "streamFindLargestInteger",
+         "body": [
+             "Stream.of (1, 2, 3)",
+             "      .reduce (Integer::max)",
+         ],
+         "description": "Stream: find largest Integer"
+    },
+    "Stream: generate infinite amount of something": {
+        "prefix": "streamGenerateInfiniteAmountOfSomething",
+         "body": [
+             "Stream<Integer> infiniteGenerationOfIntegers = Stream.iterate(1, (givenInteger) -> givenInteger + 1);"
+             "infiniteGenerationOfIntegers.limit(10).forEach(System.out::println);"
+         ],
+         "description": "Stream:generate infinite amount of something"
+    },
+    "Stream from array": {
+        "prefix": "streamFromArray",
+         "body": [
+             "int[] arrayOfIntegers = {1, 2, 3};"
+             "Arrays.stream(arrayOfIntegers).forEach(System.out::println);"
+         ],
+         "description": "Stream from array"
+    },
+    "Create random Integers": {
+        "prefix": "createRandomIntegers",
+         "body": [
+             "new Random().ints().limit(10).forEach(System.out::println);"
+         ],
+         "description": "Create random Integers"
+    },
+    //? Stream --:
+
+
+
+    //? Lambdas --v
+    "Lambda: takes something, gives you something else": {
+        "prefix": "lambdaTakesSomethingGivesYouSomethingElse",
+         "body": [
+             "Function<String, Integer> functionTakesSomethingGivesYouSomethingElse = (givenString) -> Integer.valueOf(givenString);"
+             "var outputFromFunction = functionTakesSomethingGivesYouSomethingElse.apply(\"123\");"
+             "System.out.println(outputFromFunction.getClass());"
+         ],
+         "description": "Lambda: takes something, gives you something else"
+    },
+    "Lambda: takes something, gives you same": {
+        "prefix": "lambdaTakesSomethingGivesYouSame",
+         "body": [
+             "UnaryOperator<Integer> functionTakesSomethingGivesYouSame = (x) -> x * x;"
+             "var outputFromFunction2 = functionTakesSomethingGivesYouSame.apply(5);"
+             "System.out.println(outputFromFunction2);"
+         ],
+         "description": "Lambda: takes something, gives you same"
+    },
+    "Lambda: takes something, gives you boolean": {
+        "prefix": "lambdaTakesSomethingGivesYouBoolean",
+         "body": [
+             "Predicate<Integer> functionTakesSomethingGivesYouBoolean = (givenInteger) -> givenInteger < 5;"
+             "var outputFromFunction4 = functionTakesSomethingGivesYouBoolean.test(3);"
+             "System.out.println(outputFromFunction4);"
+         ],
+         "description": "Lambda: takes something, gives you boolean"
+    },
+    "Lambda: takes something, gives you nothing": {
+        "prefix": "lambdaTakesSomethingGivesYouBoolean",
+         "body": [
+             "Consumer<String> functionTakesSomethingGivesYouBoolean = (givenString) -> System.out.println(givenString);"
+             "functionTakesSomethingGivesYouBoolean.accept(\"LoremIpsum\");"
+         ],
+         "description": "Lambda: takes something, gives you nothing"
+    },
+    "Lambda: takes nothing, gives you something": {
+        "prefix": "lambdaTakesNothingGivesYouSomething",
+         "body": [
+             "Supplier<LocalDateTime> functionTakesNothingReturnsSomething = () -> LocalDateTime.now();"
+             "System.out.println(functionTakesNothingReturnsSomething.get());"
+         ],
+         "description": "Lambda: takes nothing, gives you something"
+    },
+    //? Lambdas --^
+
+
+    //? Collections --v
+    "Create ArrayList filled with integers": {
+        "prefix": "createArrayListFilledWithIntegers",
+        "body": [
+            "List<Integer> arrayList = new ArrayList<>(IntStream.rangeClosed(0, 9).boxed().toList());"
+        ],
+        "description": "Create ArrayList filled with integers"
+    },
+    "Delete some elements from center of ArrayList": {
+        "prefix": "deleteElementsFromCenterOfArrayList",
+        "body": [
+            "var startPositionOfDeleting = 7;"
+            "var amountOfElementsToDelete = 4;"
+            "List<Integer> arrayList = new ArrayList<>(IntStream.rangeClosed(0, 9).boxed().toList());"
+            "System.out.println(arrayList);"
+            "if (startPositionOfDeleting + amountOfElementsToDelete > arrayList.size()) {"
+            "    amountOfElementsToDelete = arrayList.size() - startPositionOfDeleting;"
+            "}"
+            "arrayList.subList(startPositionOfDeleting, startPositionOfDeleting + amountOfElementsToDelete).clear();"
+            "System.out.println(arrayList);"
+        ],
+        "description": "Delete some elements from center of ArrayList"
+    },
+    "Create Comparator": {
+        "prefix": "createComparator",
+        "body": [
+            "//[ ] You need to add this inside ClassToSort --v"
+            "public static final Comparator<ClassToSort> SORT_BY_INT_VARIABLE = new ComparatorByIntVariable();"
+            "private static class ComparatorByIntVariable implements Comparator<ClassToSort> {"
+            "    @Override"
+            "    public int compare(ClassToSort o1, ClassToSort o2) {"
+            "        return o1.variableToCompare - o2.variableToCompare;"
+            "    }"
+            "}"
+            "//[ ] You need to add this inside ClassToSort --^"
+        ],
+        "description": "Create Comparator"
+    },
+    "Create Mutable Fixed Size List": {
+        "prefix": "createMutableFixedSizeList",
+        "body": [
+            "List<String> mutableFixedSizeList = Arrays.asList(\"Lorem\");"
+        ],
+        "description": "Create Mutable Fixed Size List"
+    },
+    "Create Immutable Fixed Size List": {
+        "prefix": "createImmutableFixedSizeList",
+        "body": [
+            "List<String> immutableFixedSizeList = List.of(\"Lorem\");"
+        ],
+        "description": "Create Immutable Fixed Size List"
+    },
+    "Shallow Copy List or Set": {
+        "prefix": "shallowCopyListOrSet",
+        "body": [
+            "ListOrSet<String> copiedListOrSet = listOrSet.stream().collect(Collectors.toCollection(HashSet<String>::new));"
+        ],
+        "description": "Shallow Copy List or Set"
+    },
+    "Shallow Copy Map": {
+        "prefix": "shallowCopyMap",
+        "body": [
+            "Map<String, String> clonedMap = map.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));"
+        ],
+        "description": "Shallow Copy Map"
+    },
+    "List of Generics to Array": {
+        "prefix": "listOfGenericsToArray",
+        "body": [
+                "public static <GenericClass> GenericClass[] convert(Class<GenericClass> clazz, List<GenericClass> listOfGenerics) {"
+                "    var arrayOfGenerics = (GenericClass[])Array.newInstance(clazz, listOfGenerics.size());"
+                "    arrayOfGenerics = listOfGenerics.toArray(arrayOfGenerics);"
+                "    return arrayOfGenerics;"
+                "}"
+        ],
+        "description": "List of Generics to Array"
+    },
+    "Sort Map By Key": {
+        "prefix": "sortMapByKey",
+        "body": [
+            "var sortedByKeyMap = new TreeMap(Comparator.reverseOrder()); //[ ] Reverse order or natural"
+            "sortedByKeyMap.putAll(mapToSort);"
+        ],
+        "description": "Sort Map By Key"
+    },
+    "Sort Map By Value": {
+        "prefix": "sortMapByComparableValue",
+        "body": [
+            "Map<String, Integer> sortedByValueMap = mapToSort.entrySet()"
+            "                                                 .stream()"
+            "                                                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) //[ ] Natural or Reverse order or Custom Comparator"
+            "                                                 .collect(Collectors.toMap(Map.Entry::getKey,"
+            "                                                                           Map.Entry::getValue,"
+            "                                                                           (oldValue, newValue) -> oldValue,"
+            "                                                                           LinkedHashMap::new));"
+        ],
+        "description": "Sort Map By Comparable Value"
+    },
+    "Sort Set": {
+        "prefix": "sortSet",
+        "body": [
+            "TreeSet<Integer> alwaysSortedSet = new TreeSet<>();"
+            "alwaysSortedSet.addAll(unsortedSet);"
+        ],
+        "description": "Sort Set"
+    },
+    "Sort List or Set": {
+        "prefix": "sortListOrSet",
+        "body": [
+            "ListOrSet<Integer> sortedListOrSet = listOrSet.stream().sorted().collect(Collectors.toCollection(ArrayList::new));"
+        ],
+        "description": "Sort List"
+    },
+    //? Collections --^
+
+
+
+    //? Optional --v
+    "Create Optional with given": {
+        "prefix": "createOptionalWithGiven",
+         "body": [
+             "var optionalOfClassName = Optional.ofNullable (className1);"
+         ],
+         "description": "Create Optional with given"
+    },
+    "Create empty Optional": {
+        "prefix": "createEmptyOptional",
+         "body": [
+             "var optionalOfClassName = Optional.empty ();"
+         ],
+         "description": "Create empty Optional"
+    },
+    "Optional: get content or return given": {
+        "prefix": "optionalGetContentOrReturnGiven",
+         "body": [
+             "var className1FromOptional = optionalOfClassName.orElse (0);"
+         ],
+         "description": "Optional: get content or return given"
+    },
+    //? Optional --^
+
+
+
+    //? Reflection API --v
+    "Get fields from some class": {
+        "prefix": "getFieldsFromClass",
+        "body": [
+            "var string = new String();",
+            "var arrayOfNamesOfFieldsFromClass1 = string.getClass().getDeclaredFields();",
+            "Stream.of(arrayOfNamesOfFieldsFromClass1).map(Field::getName).forEach(System.out::println);"
+        ],
+        "description": "Get fields from some class"
+    },
+    "Get all functions from some class": {
+        "prefix": "getAllFunctionsFromClass",
+        "body": [
+            "var string = new String();"
+            "var arrayOfNamesOfFieldsFromClass1 = string.getClass().getDeclaredMethods();"
+            "Stream.of(arrayOfNamesOfFieldsFromClass1).forEach(System.out::println);"
+        ],
+        "description": "Get all functions from some class"
+    },
+    "Get all Interfaces from some class": {
+        "prefix": "getAllInterfacesFromClass",
+        "body": [
+            "var string = new String();"
+            "var arrayOfNamesOfFieldsFromClass1 = string.getClass().getInterfaces();"
+            "Stream.of(arrayOfNamesOfFieldsFromClass1).map(Class::getName).forEach(System.out::println);"
+        ],
+        "description": "Get all Interfaces from some class"
+    },
+    //? Reflection API --v
+
+
+
+    //? Date and Time with Time Zone --v
+    "Create ZonedDateTime": {
+        "prefix": "createZonedDateTime",
+         "body": [
+             "var zonedDateTime = ZonedDateTime.of (2023,",
+             "                                      12,",
+             "                                      31,",
+             "                                      23,",
+             "                                      59,",
+             "                                      0,",
+             "                                      0,",
+             "                                      ZoneId.of (\"America/Chicago\"));"
+         ],
+         "description": "Create ZonedDateTime"
+    },
+    "Create current ZonedDateTime": {
+        "prefix": "createCurrentZonedDateTime",
+         "body": [
+             "var currentZonedDateTime = ZonedDateTime.now ();"
+         ],
+         "description": "Create current ZonedDateTime"
+    },
+    "Change existing ZonedDateTime": {
+        "prefix": "chageZonedDateTime",
+         "body": [
+             "var newZonedDateTime = oldZonedDateTime.plus (1L, ChronoUnit.HOURS);"
+         ],
+         "description": "Change existing date and time with time zone"
+    },
+    "Change existing ZonedDateTime by nullify everything till given": {
+        "prefix": "nullifyDateTimeWithTimeZoneTillGiven",
+         "body": [
+             "var beginningOfDay = oldZonedDateTime.truncatedTo (ChronoUnit.DAYS);"
+         ],
+         "description": "Change existing date and time with time zone by nullify everything till given"
+    },
+    "Format ZonedDateTime to String": {
+        "prefix": "fromDateTimeWithTimeZoneToString",
+         "body": [
+             "var zonedDateTimeAsString = existingZoneDateTime.format (DateTimeFormatter.ofPattern (\"dd.MM.yyyy HH:mm:ss\"));"
+         ],
+         "description": "Format date and time with time zone to String"
+    },
+    "Format String to ZonedDateTime": {
+        "prefix": "fromStringToZonedDateTime",
+         "body": [
+             "var zonedDateTimeFromString = ZonedDateTime.parse (zonedDateTimeAsString, DateTimeFormatter.ofPattern (\"dd.MM.yyyy'T'HH:mm:ss\"));"
+         ],
+         "description": "Format String to ZonedDateTime"
+    },
+    "Calculate years, months and days between 2 LocalDates": {
+        "prefix": "calculateYearsMonthsDaysBetween2LocalDates",
+         "body": [
+             "var yearsMonthsDaysBetweenLocalDates = Period.between (olderLocalDate1",
+             "                                                       newerLocalDate2);"
+         ],
+         "description": "Calculate years, months and days between 2 LocalDates"
+    },
+    "Calculate hours, minutes and seconds between 2 ZonedDateTimes": {
+        "prefix": "calculateHoursMinutesSecondsBetween2ZonedDateTimes",
+         "body": [
+             "var hoursMinutesSecondsBetweenZonedDateTimes = Duration.between (olderZonedDateTime,",
+             "                                                                 newerZonedDateTime);"
+         ],
+         "description": "Calculate hours, minutes and seconds between 2 ZonedDateTimes"
+    },
+    "Find complex date": {
+        "prefix": "findComplexDate",
+         "body": [
+             "var secondSaturdayOfCurrentMonth = LocalDate.of(LocalDate.now().getYear(),"
+             "                                                LocalDate.now().getMonth(),"
+             "                                                1)"
+             "                                            .with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY))"
+             "                                            .with(TemporalAdjusters.next(DayOfWeek.SATURDAY));"
+             "System.out.println(secondSaturdayOfCurrentMonth);"
+         ],
+         "description": "Find complex date"
+    },
+    //? Date and Time with Time Zone --^
+
+
+
+    //? Multy-Thread --v
+    "Create CompletableFuture": {
+        "prefix": "createCompletableFuture",
+         "body": [
+             "var threadPool = Executors.newFixedThreadPool(2);"
+             "CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(() -> {"
+             "    System.out.println(\"Thread 1 is created\");"
+             "    return 1;"
+             "}, threadPool).thenComposeAsync(outputFromPreviousCompletableFuture -> CompletableFuture.supplyAsync(() -> { //? Sycnhroniously runs second Completable Future"
+             "    System.out.println(\"Thread 2 is created\");"
+             "    return 2 + outputFromPreviousCompletableFuture;"
+             "}, threadPool));"
+             "CompletableFuture<Integer> completableFuture2 = CompletableFuture.supplyAsync(() -> {"
+             "    System.out.println(\"Thread 3 is created\");"
+             "    int[] arrayOfInts = {1, 1}; //? It is needed only for throwing an Exception"
+             "    for (int currentPosition = 0; currentPosition < 3; currentPosition++) {"
+             "        arrayOfInts[currentPosition] = 9;"
+             "    }"
+             "    return 2;"
+             "}, threadPool).handle((outputFromThisCompletableFuture, exception) -> { //[ ] Handling exception"
+             "    if (exception != null) {"
+             "        return 9;"
+             "    }"
+             "    return outputFromThisCompletableFuture;"
+             "});"
+             "int sum = Stream.of(completableFuture, completableFuture2).map(CompletableFuture::join) //? Joining outputs from all CompletableFutures into a Stream"
+             "                .reduce(0, Integer::sum); //[ ] What to do with outputs from all CompletableFutures as a Stream"
+             "System.out.println(sum);"
+             "threadPool.shutdown();"
+             "threadPool.awaitTermination(10, TimeUnit.MINUTES);"
+         ],
+         "description": "Create CompletableFuture"
+    },
+    "Create Thread-Safe primitive": {
+        "prefix": "createThreadSafePrimitive",
+         "body": [
+             "var threadSafe%Primitive% = new Atomic%Primitive% (); //? Replace %Primitive% with either Integer, Double, Long, or Boolean"
+         ],
+         "description": "Create Thread-Safe primitive"
+    },
+    "Create Thread Pool": {
+        "prefix": "createThreadPool",
+         "body": [
+             "var threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors ());",
+             "for (int iterator = 0; iterator < 5; iterator++) {",
+             "    var outputFromCurrentThreadAsFuture = threadPool.submit(() -> {",
+             "        System.out.println(Thread.currentThread().getName() + \" started to work\");",
+             "        return new Random().nextInt(10);",
+             "    });",
+             "    System.out.println(outputFromCurrentThreadAsFuture.get());",
+             "}",
+             "threadPool.shutdown();",
+             "threadPool.awaitTermination(10, TimeUnit.MINUTES);"
+         ],
+         "description": "Create Thread Pool"
+    },
+    "Create Thread-Safe Class that uses Lock": {
+        "prefix": "createThreadSafeClassThatUsesLock",
+         "body": [
+             "static class ThreadSafeClass { final Lock lock = new ReentrantLock (); int variable = 20;}",
+             "public static void main (String[] args) throws InterruptedException, ExecutionException {",
+             "var threadPool = Executors.newFixedThreadPool (Runtime.getRuntime ().availableProcessors ());",
+             "var threadSafeClass1 = new ThreadSafeClass ();",
+             "var threadSafeClass2 = new ThreadSafeClass ();",
+             "for (int iterator = 0; iterator < 5; iterator++) {",
+             "threadPool.submit ( () -> {",
+             "System.out.println (Thread.currentThread ().getName () + \" started to work\");",
+             "try { while (true) {",
+             "boolean whetherLock1Succeed = threadSafeClass1.lock.tryLock ();",
+             "boolean whetherLock2Succeed = threadSafeClass2.lock.tryLock ();",
+             "if (whetherLock1Succeed && whetherLock2Succeed) {break;}",
+             "if (whetherLock1Succeed) {threadSafeClass1.lock.unlock ();}",
+             "if (whetherLock2Succeed) {threadSafeClass2.lock.unlock ();}}",
+             "var randomInteger = new Random ().nextInt (4);",
+             "threadSafeClass1.variable += randomInteger;",
+             "threadSafeClass2.variable -= randomInteger;",
+             "System.out.println (threadSafeClass1.variable + \",\" + threadSafeClass2.variable);",
+             "} finally{threadSafeClass1.lock.unlock ();threadSafeClass2.lock.unlock ();}});}}"
+         ],
+         "description": "Create Thread-Safe Class that uses Lock"
+    },
+    "Create Fork/Join Class": {
+        "prefix": "createForkJoinClass",
+         "body": [
+             "public class CustomForkJoinRecursiveTask extends RecursiveTask<Integer> {"
+             "    private int[] arr;"
+             ""
+             "    public CustomForkJoinRecursiveTask(int[] arr) {"
+             "        this.arr = arr;"
+             "    }"
+             ""
+             "    @Override"
+             "    protected Integer compute() {"
+             "        if (arr.length > 2) {"
+             "            return ForkJoinTask.invokeAll(createSubtasks()).stream().mapToInt(ForkJoinTask::join).sum();"
+             "        } else { //[ ] Base case"
+             "            return Arrays.stream(arr).sum();"
+             "        }"
+             "    }"
+             ""
+             "    private Collection<CustomForkJoinRecursiveTask> createSubtasks() {"
+             "        List<CustomForkJoinRecursiveTask> dividedTasks = new ArrayList<>();"
+             "        dividedTasks.add(new CustomForkJoinRecursiveTask(Arrays.copyOfRange(arr, 0, arr.length / 2)));"
+             "        dividedTasks.add(new CustomForkJoinRecursiveTask(Arrays.copyOfRange(arr, arr.length / 2, arr.length)));"
+             "        return dividedTasks;"
+             "    }"
+             ""
+             "    /** Defines what you need to add in a App.java in a main() method to work with this class */"
+             "    private void howToRunThisClassInMain() {"
+             "        ForkJoinPool commonPool = ForkJoinPool.commonPool();"
+             "        int[] arrayOfInts = {1, 2, 3};"
+             "        var forkJoinTask = new CustomForkJoinRecursiveTask(arrayOfInts);"
+             "        int result = commonPool.invoke(forkJoinTask);"
+             "        System.out.println(result);"
+             "    }"
+             "}"
+         ],
+         "description": "Create Fork/Join Class"
+    },
+    "Create CountDownLatch": {
+        "prefix": "createCountDownLatch",
+         "body": [
+            "var threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());"
+            "var countDownLatch = new CountDownLatch(5); //[ ] Choose how much countDownLatch.countDown() must be called"
+            "var integerVariable = 0;"
+            "for (int iterator = 0; iterator < 5; iterator++) {"
+            "    var outputFromCurrentThreadAsFuture = threadPool.submit(() -> {"
+            "        System.out.println(\"Hello! I am a new Thread\");"
+            "        countDownLatch.countDown();"
+            "        return 1;"
+            "    });"
+            "}"
+            "System.out.println(\"I am here waiting for other Threads to finish their work...\");"
+            "countDownLatch.await(10, TimeUnit.SECONDS); //? Stops this Thread until countDownLatch.getCount() = 0 or until given time has passed"
+            "System.out.println(\"All threads have finished their work\");"
+            "threadPool.shutdown();"
+            "threadPool.awaitTermination(10, TimeUnit.MINUTES);"
+         ],
+         "description": "Create CountDownLatch"
+    },
+    "Create CyclicBarrier": {
+        "prefix": "createCyclicBarrier",
+         "body": [
+            "var threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());"
+            "var cyclicBarrier = new CyclicBarrier(5, () -> System.out.println(\"CyclicBarrier is open\")); //[ ] Choose how much Thread should call cyclicBarrier.await()"
+            "for (int iterator = 0; iterator < 5; iterator++) {"
+            "    var outputFromCurrentThreadAsFuture = threadPool.submit(() -> {"
+            "        System.out.println(\"Hello from new Thread! I am waiting for other threads to call cyclicBarrier.await()\");"
+            "        cyclicBarrier.await();"
+            "        System.out.println(\"I am Thread and now I am free\");"
+            "        return 1;"
+            "    });"
+            "}"
+            "threadPool.shutdown();"
+            "threadPool.awaitTermination(10, TimeUnit.MINUTES);"
+         ],
+         "description": "Create CyclicBarrier"
+    },
+    "Create Semaphore": {
+        "prefix": "createSemaphore",
+         "body": [
+            "var threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());"
+            "var semaphore = new Semaphore(5); //[ ] Choose how many points there is for Threads to acquire via semaphore.acquire()"
+            "for (int iterator = 0; iterator < 5; iterator++) {"
+            "    var outputFromCurrentThreadAsFuture = threadPool.submit(() -> {"
+            "        System.out.println(\"I am Thread and I am alive!\");"
+            "        try {"
+            "            semaphore.acquire(2); //[ ] Choose how many points to acquire"
+            "            System.out.println(\"I acquired 2 points from semaphore!\");"
+            "        } finally {"
+            "            semaphore.release(2);"
+            "            System.out.println(\"I released 2 points back to semaphore\");"
+            "        }"
+            "        return 1;"
+            "    });"
+            "}"
+            "threadPool.shutdown();"
+            "threadPool.awaitTermination(10, TimeUnit.MINUTES);"
+         ],
+         "description": "Create Semaphore"
+    },
+    "Create Phaser": {
+        "prefix": "createPhaser",
+         "body": [
+            "var threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());"
+            "Phaser phaser = new Phaser(); //? Also, you can choose number of availeble points here, instead of calling phaser.register() in each Thread"
+            "for (int iterator = 0; iterator < 5; iterator++) {"
+            "    var outputFromCurrentThreadAsFuture = threadPool.submit(() -> {"
+            "    System.out.println(\"I am Thread and I am alive\");"
+            "    try {"
+            "       phaser.register(); //? Increases an amount of availible points"
+            "       phaser.arriveAndAwaitAdvance(); //? Wait untill every registered Thread will call phaser.register()"
+            "       System.out.println(\"I am Thread and I am free\");"
+            "       phaser.arriveAndDeregister(); //? Decrease amoun of availeble points"
+            "   } finally {"
+            "   "
+            "   }"
+            "   return 1;"
+            "   });"
+            "}"
+            "threadPool.shutdown();"
+            "threadPool.awaitTermination(10, TimeUnit.MINUTES);"
+         ],
+         "description": "Create Phaser"
+    },
+    "Create Exchanger": {
+        "prefix": "createExchanger",
+         "body": [
+            "var threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());"
+            "Exchanger<String> exchanger = new Exchanger<>();"
+            "for (int iterator = 0; iterator < 2; iterator++) {"
+            "    var outputFromCurrentThreadAsFuture = threadPool.submit(() -> {"
+            "    try {"
+            "        var textFromOtherThread = exchanger.exchange(\"Text from \" + Thread.currentThread(), 2, TimeUnit.SECONDS);"
+            "    } finally {"
+            "    "
+            "    }"
+            "    return 1;"
+            "    });"
+            "}"
+            "threadPool.shutdown();"
+            "threadPool.awaitTermination(10, TimeUnit.MINUTES);"
+         ],
+         "description": "Create Exchanger"
+    },
+    "Pause Thread": {
+        "prefix": "pauseThread",
+         "body": [
+             "TimeUnit.SECONDS.sleep(4);"
+         ],
+         "description": "Pause Thread"
+    },
+    //? Multy-Thread --^
+
+
+
+    //? Regexp --v
+    "Create Regexp Pattern Finder": {
+        "prefix": "createRegexpPatternFinder",
+         "body": [
+             "var regexpPatternFinder = Pattern.compile(\"..Regexp\")",
+             "                                 .matcher(\"LoremRegexpIpsumRegexp\");",
+             "while(regexpPatternFinder.find()) //? Whether new pattern match was found",
+             "{",
+             "    System.out.println(\"1 New pattern match was found: \" + regexpPatternFinder.group());",
+             "}"
+         ],
+         "description": "Create Regexp Pattern Finder"
+    },
+    "Replace Regexp Pattern Within String Text": {
+        "prefix": "replaceRegexpPatternWithinStringText",
+         "body": [
+             "\"Text, with parts to be replaced. It replaces them all\".replaceAll(\"replace.\", \"NEWTEXT\");"
+         ],
+         "description": "Replace Regexp Pattern Within String Text"
+    },
+    //? Regexp --^
+
+
+
+    //? Encoding
+    "Encode:Base64": {
+        "prefix": "encodeBase64",
+         "body": [
+             "String encodedString = Base64.getEncoder().encodeToString(\"Lorem Ipsum\".getBytes(\"utf-8\"));"
+             "System.out.println(encodedString);"
+             "var decodedString = new String(Base64.getDecoder().decode(encodedString), \"utf-8\"); //input"
+             "System.out.println(decodedString);"
+         ],
+         "description": "Encode:Base64"
+    },
+    //? Encoding
+
+
+    //? Testing
+    "Calculate Functions's Time": {
+        "prefix": "calculateFunctionTime",
+         "body": [
+             "long startTime = System.nanoTime();"
+             "long stopTime = System.nanoTime();"
+             "System.out.println(stopTime - startTime);"
+         ],
+         "description": "Calculate Functions's Time"
+    },
+    //? Testing
+
+
+
+    //? Wait --v
+    "Wait": {
+        "prefix": "wait",
+         "body": [
+             "Thread.sleep (3000L);"
+         ],
+         "description": "Wait"
+    },
+    //? Wait --^
+
+
+    //? Patterns --v
+    "Factory Method": {
+        "prefix": "factoryMethod",
+         "body": [
+            "public static <Generic extends ParentClassOrInterface> Generic factoryMethod(Class<Generic> clazz) {"
+            "    if (clazz.equals(Child1.class)) {"
+            "        return (Generic) new Child1();"
+            "    } else if (clazz.equals(Child2.class)) {"
+            "        return (Generic) new Child2();"
+            "    }"
+            "    return null;"
+            "}"
+         ],
+         "description": "Factory Method"
+    },
+    //? Patterns --^
+
+
+
+    //? Hibernate --v
+    "Hibernate table as Class": {
+        "prefix": "hibernateTableAsClass",
+        "body": [
+            "// @Table (name = \"table_name\") //? For tables with complex names",
+            "@Entity",
+            "@JsonInclude(NON_DEFAULT) //! You need Spring-Web for this to work",
+            "@ToString(exclude = \"mapOfTable2s\") //! You need to exclude every Lst, Map, etc",
+            "@EqualsAndHashCode(exclude = \"mapOfTable2s\")",
+            "@AllArgsConstructor",
+            "@NoArgsConstructor",
+            "@SuperBuilder",
+            "@Data",
+            "public class Table1 {",
+            "    @Id",
+            "    @GeneratedValue(strategy = GenerationType.IDENTITY)",
+            "    private Long id;",
+            "",
+            "    @Column(unique = true,",
+            "            nullable = false/*,",
+            "            name = \"column_name\"*/) //? For columns with complex names",
+            "    // @NotEmpty(message = \"Email cannot be empty\")  //! You need Spring-Validation dependency for this to work",
+            "    // @Email(message = \"Invalid email. Please enter a valid email address\") //! You need Spring-Validation dependency for this to work",
+            "    @Size(min = 14, max = 32) //! You need Spring-Validation dependency for this to work",
+            "    private String name;",
+            "",
+            "    @Enumerated(EnumType.STRING)",
+            "    private Enumeration1 enumeration;",
+            "",
+            "    public enum Enumeration1 { VALUE1, VALUE2, VALUE3 }",
+            "",
+            "    //! Don't forget to exclude this vraiable from @ToString and @EqualsAndHashCode",
+            "    @OneToMany(mappedBy = \"myOnlyOneTalbe1\", //? Variable name in Table2 that points to Talbe1.id",
+            "               cascade = CascadeType.ALL,",
+            "    orphanRemoval = false) //? Doesn't delete users if they were deleted from this Map, but not deleted from database (true is rarely used)",
+            "    @MapKey(name = \"name\") //? Table2.name will be the key to this Map",
+            "    @Builder.Default //? It is needed for creating of TreeMap, ArrayList, etc, instead of one randomly choosed by Hibernate",
+            "    //@JsonIgnore //? If you don't want this variable to be added to JSON",
+            "    private Map<String, Table2> mapOfTable2s = new TreeMap<String, Table2>(); //! It doesn't represent any column. It is only for Java",
+            "}"
+        ],
+        "description": "Hibernate table as Class"
+    },
+    "Hibernate Embeddable Table": {
+        "prefix": "hibernateEmbeddableTable",
+         "body": [
+             "// This vraible must be placed in a table for which you want to create an embeddable table--v",
+             "//[ ] Don't forget to exclude this vraiable from @ToString and @EqualsAndHashCode",
+             "@ElementCollection //? Says that this map points to a table that annotated with @Embeddable",
+             "@CollectionTable(name = \"table5_embeddabletable\", //? Name of a table to create",
+             "                 joinColumns = @jakarta.persistence.JoinColumn(name = \"table5_id\")) //? Name of an id column to create",
+             "@MapKeyColumn(name = \"language\") //[ ] Column in TableEmbeddable that will be used as a key to this Map",
+             "@Column(name = \"translation\") //[ ] Column in TableEmbeddable that will be used as a value to this Map",
+             "@Builder.Default //? It is needed for creating of TreeMap, ArrayList, etc, instead of one randomly choosed by Hibernate",
+             "private java.util.Map<String, TableEmbeddable> rowsFromEmbeddableTable = new java.util.HashMap<>(); //! This map doesn't represent any column in this table in the database",
+             "// This vraible must be placed in a table for which you want to create an embeddable table--^",
+             "",
+             "// This class must be created in a separeted file. It is added here for the sake of brebity--v",
+             "//[ ] Create a separate file for this class"
+             "@Data",
+             "@NoArgsConstructor",
+             "@AllArgsConstructor",
+             "@Embeddable",
+             "/**",
+             "* Every table can create an iterable variable that points to that class.",
+             "* Hibernate will create a new table for every table that points for this class.",
+             "* It is good for translations.",
+             "*/",
+             "public class TableEmbeddable {",
+             "    //! There is no Id Column",
+             "    //! Column that points to other table will be automatically created",
+             "    private String language;",
+             "    private String translation;",
+             "}",
+             "// This class must be created in a separeted file. It is added here for the sake of brebity--^"
+         ],
+         "description": "Hibernate Embeddable Table"
+    },
+    //? Hibernate --^
+
+    // SQL-queries --v
+    "SQL-query with Pageable": {
+        "prefix": "sqlQueryWithPageable",
+        "body": [
+            "var pageRequest = PageRequest.of(0, //? Page number",
+            "                                 2, //? Size of one page",
+            "                                 Sort.by(\"id\"));",
+            "var currentPageFromAllPages = table1Repository.findAllBy(pageRequest);",
+            "currentPageFromAllPages.forEach(System.out::println);",
+            "while (currentPageFromAllPages.hasNext()) {",
+            "    currentPageFromAllPages = table1Repository.findAllBy(currentPageFromAllPages.nextPageable());",
+            "    currentPageFromAllPages.forEach(System.out::println);",
+            "}"
+        ],
+        "description": "SQL-query with Pageable"
+    },
+    // SQL-queries --^
+
+
+
+    //? Spring --v
+    "Get Bean from ApplicationContext": {
+        "prefix": "getBeanFromApplicationContext",
+         "body": [
+             "var classbean = application.getBean(\"classBean\", ClassBean.class);"
+         ],
+         "description": "Get Bean from ApplicationContext"
+    },
+    "Spring main default runner": {
+        "prefix": "springMainDefaultRunner",
+         "body": [
+             "var application = SpringApplication.run(Hibernatetest2Application.class, args);"
+         ],
+         "description": "Spring main default runner"
+    },
+    //? Spring --^
+}
