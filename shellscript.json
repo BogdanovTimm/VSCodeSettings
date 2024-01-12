@@ -1,0 +1,576 @@
+{
+	// Place your snippets for shellscript here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+
+
+
+
+
+
+	"1st Line for a Bash Script": {
+	 	"prefix": "firstLineForBash",
+	 	"body": [
+	 		"#!/bin/bash",
+			"set -o pipefail #? echo \\$? after commandThatDidError | commandThatWasSuccess returns error code, instead of a success one"
+	 	],
+	 	"description": "Creates 1st Line for a Bash Script"
+	 },
+	 "Print in console": {
+	 	"prefix": "sout",
+	 	"body": [
+	 		"echo \"\""
+	 	],
+	 	"description": "Prints in console"
+	 },
+	 "Run command without printing output from it in a terminal": {
+	 	"prefix": "runCommandWithoutPrintingItsOutput",
+	 	"body": [
+	 		"\\$(command_name)"
+	 	],
+	 	"description": "Run commend without printing output from it in a terminal"
+	 },
+	 "Run command and Save Output and Errors in different Files": {
+	 	"prefix": "runCommandWithoutPrintingItsOutput",
+	 	"body": [
+	 		"application_name 1>>./output.txt 2>>./errors.txt #? Saves output in output.txt and saves all errors into errors.txt"
+	 	],
+	 	"description": "Run command and Save Output and Errors in different Files"
+	 },
+	 "Do some Mathematics": {
+	 	"prefix": "math",
+	 	"body": [
+	 		"\\$((variable1 + 3))"
+	 	],
+	 	"description": "Do some Mathematics"
+	 },
+
+
+
+
+
+
+
+	 // Function --v
+	 "Create Function": {
+	 	"prefix": "createFunction",
+	 	"body": [
+	 		"custom_function() {"
+			"    echo \"1st given argument is: \\$1\""
+			"    echo \"2d given argument is: \\$2\""
+			"}"
+			"custom_function \"Lorem\" \"Ipsum\""
+	 	],
+	 	"description": "Create Function"
+	 },
+	 // Function --^
+	 
+	 
+
+
+
+
+
+	 // While-loops --v
+	 "Create while-loop with iterator": {
+	 	"prefix": "createWhileLoopWithIterator",
+	 	"body": [
+	 		"iterator=0"
+			"while (( \\$iterator <= 10 )) && (( \\$iterator == 5 )) || (( \\$iterator != 6 ))"
+			"do"
+			"	echo \"\\$iterator\""
+			"	iterator=\\$((\\$iterator + 1))"
+			"done"
+	 	],
+	 	"description": "Create while-loop with iterator"
+	 },
+	 "Create while-loop that checks wtherher some File Exists": {
+	 	"prefix": "createWhileLoopThatChecksWtherherFileExists",
+	 	"body": [
+	 		"while [ -f ~/filename.txt ]"
+			"do"
+			"	echo \"File still exists\""
+			"done"
+	 	],
+	 	"description": "Create while-loop that checks wtherher some File Exists"
+	 },
+	 "Create while-loop that checks wtherher some Folder Exists": {
+	 	"prefix": "createWhileLoopThatChecksWtherherFolderExists",
+	 	"body": [
+	 		"while [ -d /etc ]"
+			"do"
+			"	echo \"Folder still exists\""
+			"done"
+	 	],
+	 	"description": "Create while-loop that checks wtherher some Folder Exists"
+	 },
+	 // While-loops --^
+
+
+
+
+
+
+
+	 // For-loops --v
+	 "Create for-loop for numbers": {
+	 	"prefix": "createForLoop",
+	 	"body": [
+	 		"for (( iterator=0; iterator <= 5; iterator++ ))"
+			"do"
+			"	echo \"\\$iterator\""
+			"	if (( \\$iterator == 2 ))"
+			"	then"
+			"		continue #? Skips all code below and goes to the next iteration of for-loop"
+			"	fi"
+			"	if (( \\$iterator == 3 ))"
+			"	then"
+			"		break #? Goes out the for-loop"
+			"	fi"
+			"done"
+	 	],
+	 	"description": "Create for-loop for numbers"
+	 },
+	 "Create for-loop for files": {
+	 	"prefix": "createForLoopForFiles",
+	 	"body": [
+	 		"for current_file in /var/log/*.log"
+			"do echo \"\\$current_file\""
+			"done"
+	 	],
+	 	"description": "Create for-loop for files"
+	 },
+	 // For-loops --^
+
+
+
+
+
+
+
+	 // If-Else --v
+	 "Creates if-elif-else": {
+	 	"prefix": "ifelifelse",
+	 	"body": [
+			"variable1=1"
+			"if [[ \\$variable1 -le 5 ]] && [[ \\$variable1 != 1 ]] ; then"
+			"	echo \"Statement is true\""
+			"elif [[ ! \\$variable1 == 9 ]] || [[ \\$variable1 -gt 1 ]] ; then"
+			"	echo \"Another Statement is true\""
+			"else"
+			"	echo \"Statement is false\""
+			"fi"
+	 	],
+	 	"description": "Creates if-elif-else"
+	 },
+	 "Creates if-elif-else for String": {
+	 	"prefix": "ifelifelseForString",
+	 	"body": [
+			"variable1=\"Lorem\""
+			"variable2=\"Ipsum\""
+			"if [[ \"\\$variable1\" == \"\\$variable2\" ]] ; then"
+			"	echo \"Variables are equal\""
+			"elif [[ \"\\$variable1\" < \"\\$variable2\" ]] ; then"
+			"	echo \"Variable1 is smaller than Variable2\""
+			"else"
+			"	echo \"Variable1 is larger than Variable2\""
+			"fi"
+	 	],
+	 	"description": "Creates if-elif-else for String"
+	 },
+	 "Check whether some Text is in a given file": {
+	 	"prefix": "checkWhetherThereIsTextInAFile",
+	 	"body": [
+	 		"if grep -q \"Desired Text\" ./filename.txt"
+			"then echo \"There is a given text within a given file\""
+			"else echo \"There is no given text within a given file\""
+			"fi"
+	 	],
+	 	"description": "Check whether some Text is in a given file"
+	 },
+	 "Check whether some File or Folder exists": {
+	 	"prefix": "whetherFileOrFolderExists",
+	 	"body": [
+	 		"if [[ -e ~/file_or_folder ]]; then #? Whether file or folder with given name exist in [~/]",
+			"    echo \"Exist\"",
+			"else",
+			"    echo \"Not exist\"",
+			"fi"
+	 	],
+	 	"description": "Check whether File or Folder exists"
+	 },
+	 "Check whether some Applicaiton is installed": {
+	 	"prefix": "checkWhetherSomeApplicationIsInstalled",
+	 	"body": [
+	 		"if command -v application_name #? Checks whether given application is installed on this system"
+			"then echo \"Given application is installed on this system\""
+			"else echo \"Given application is not installed on this system\""
+			"fi"
+	 	],
+	 	"description": "Check whether some Applicaiton is installed"
+	 },
+	 // If-Else --^
+
+
+
+
+
+
+
+	 // Case
+	 "Create case-statement": {
+	 	"prefix": "createCaseStatement",
+	 	"body": [
+	 		"variable1=1"
+			"case \\$variable1 in"
+			"	1) echo \"variable1 = 1\";;"
+			"	2) echo \"variable1 = 2\";;"
+			"	*) echo \"variable1 = something else\""
+			"esac"
+	 	],
+	 	"description": "Create case-statement"
+	 },
+	 // Case
+
+
+
+
+
+
+
+	 // Piping --v
+	 "Send Variable to Another Script": {
+	 	"prefix": "sendVariableToAnotherScript",
+	 	"body": [
+	 		"variable1=\"Lorem Ipsum\"",
+			"export \\$variable1",
+			"./anotherScript.sh"
+	 	],
+	 	"description": "Send Variable to Another Script"
+	 },
+	 // Piping --^
+
+
+
+
+
+
+
+	 // Strings --v
+	 "String Contatination": {
+	 	"prefix": "stringConcatination",
+	 	"body": [
+	 		"string1=\"Lorem\"",
+			"string2=\"Ipsum\"",
+			"string3=\\$string1\\$string2",
+			"echo \\$string3"
+	 	],
+	 	"description": "String Contatination"
+	 },
+	 "String To Upper Case": {
+	 	"prefix": "stringToUpperCase",
+	 	"body": [
+	 		"string1=\"Lorem\""
+			"string1ToUpperCase=\\${string1^^}"
+	 	],
+	 	"description": "String To Upper Case"
+	 },
+	 "Find Nth Word if Mth word = given": {
+	 	"prefix": "findNthWordIfMthWordEqualsToGiven",
+	 	"body": [
+	 		"awk '(\\$3 == \"Success1\" || \\$3 == \"Success2\") {print \\$1}' \"filename.txt\" #? Print 1st word if 3d word = Success1 or Success2"
+	 	],
+	 	"description": "Find Nth Word if Mth word = given"
+	 },
+	 "Replace word": {
+	 	"prefix": "replaceWord",
+	 	"body": [
+	 		"variable1=\"Fuck you, Fuck, fuck, fucking\"",
+			"printf \"%s\" \"\\${variable1}\" | sed -E 's/(F|f)uck/CENSORED/g' #? Replaces every [fuck] with [CENSORED]. You can insert [2], [3], etc instead of [g] to replace only 2d match"
+	 	],
+	 	"description": "Replace word"
+	 },
+	 // Strings --^
+
+
+
+
+
+
+
+     // Files
+	 "Write multiple lines into file": {
+	 	"prefix": "writeMultipleLinesIntoFile",
+	 	"body": [
+	 		"cat << EOF > \"filename.txt\"",
+			"Lorem Ipsum",
+			"Dolor Sit Amet \\$variable1",
+			"EOF"
+	 	],
+	 	"description": "Write multiple lines into file"
+	 },
+	 // Files
+
+
+
+
+
+
+
+	 // Arrays
+	 "Create Array": {
+	 	"prefix": "createArray",
+	 	"body": [
+	 		"customArray=(\"Lorem\" \"Ipsum\")"
+	 	],
+	 	"description": "Create Array"
+	 },
+	 "Array Length": {
+	 	"prefix": "arrayLength",
+	 	"body": [
+	 		"customArrayLength=\\${#customArray[@]}"
+	 	],
+	 	"description": "Array Length"
+	 },
+	 "Array Get Value": {
+	 	"prefix": "arrayGetValue",
+	 	"body": [
+	 		"valueOfPosition1=\\${customArray[1]}"
+	 	],
+	 	"description": "Array get Value"
+	 },
+	 "Array Set Value": {
+	 	"prefix": "arraySetValue",
+	 	"body": [
+	 		"car[0]=\"Lorem\""
+	 	],
+	 	"description": "Array Set Value"
+	 },
+	 // Arrays
+
+
+
+	 "Check whether some Applicaiton was run succesfully or not": {
+	 	"prefix": "checkWhetherAoplicationWasRunSuccesfully",
+	 	"body": [
+	 		"wasLastCommandRunSuccesfully=\\$? # Was last command run succesfully? 0 = good, others = bad"
+	 	],
+	 	"description": "Check whether some Applicaiton was run succesfully or not"
+	 },
+	 "Install applicaiton without asking": {
+	 	"prefix": "installApplicationWithoutAsking",
+	 	"body": [
+	 		"sudo apt update && sudo apt install -y application_name #? Install without asking"
+	 	],
+	 	"description": "Install applicaiton without asking"
+	 },
+	 "Save output from running command into file (Creates a New Line to the End of File)": {
+	 	"prefix": "saveOutputIntoFileAsNewLine",
+	 	"body": [
+	 		"command_name >> ./logfile_name.txt #? Stores output of this command into given file (creates a new one if not exist)"
+	 	],
+	 	"description": "Save output from running command into file (Creates a New Line to the End of File)"
+	 },
+	 "Save output from running command into file (Replaces everything within File)": {
+	 	"prefix": "saveOutputIntoFileByReplacingEverythingWithinFile",
+	 	"body": [
+	 		"command_name > ./logfile_name.txt #? Stores output of this command into given file (creates a new one if not exist)"
+	 	],
+	 	"description": "Save output from running command into file (Replaces everything within File)"
+	 },
+	 "Force Application to Exit": {
+	 	"prefix": "forceApplicationToExit",
+	 	"body": [
+	 		"exit 0 #? Exit script and save a code that represents whether this script did its job. 0 = good, others = bad"
+	 	],
+	 	"description": "Force Application to Exit"
+	 },
+	 "Thread.sleep()": {
+	 	"prefix": "sleep",
+	 	"body": [
+	 		"sleep 5 # Thread.sleep(5000);"
+	 	],
+	 	"description": "Thread.sleep()"
+	 },
+	 "Create User Input Field in Terminal": {
+	 	"prefix": "createUserInputField",
+	 	"body": [
+	 		"read -r user_input_field #? String user_input_field = new Scanner(System.in).nextLine();"
+			"echo \"You have typed \\$user_input_field\""
+	 	],
+	 	"description": "Create User Input Field in Terminal"
+	 },
+	 "Create Infinite User Input Field in Terminal": {
+	 	"prefix": "createInfiniteUserInputField",
+	 	"body": [
+	 		"while read -r user_input_field"
+			"do"
+			"	echo \"You have typed: \\$user_input_field\""
+			"done"
+	 	],
+	 	"description": "Create Infinite User Input Field in Terminal"
+	 },
+	 "Read all lines from a file": {
+	 	"prefix": "readAllLinesFromFile",
+	 	"body": [
+	 		"while fileToRead= read -r currentLine"
+			"do"
+			"	echo \"\\$currentLine\""
+			"done < filename.txt"
+	 	],
+	 	"description": "Read all lines from a file"
+	 },
+	 "Find All Lines in file that has given text in them": {
+	 	"prefix": "findAllLinesThatHaveGivenString",
+	 	"body": [
+	 		"variable1= grep -i \"text to find\" filename.txt #? Delete -i to make it case insensitive"
+	 	],
+	 	"description": "Find All Lines in file that has given text in them"
+	 },
+	 "Find All Lines in file that does not have given text in them": {
+	 	"prefix": "findAllLinesThatDoesntHaveGivenString",
+	 	"body": [
+	 		"variable1= grep -i -v \"text to find\" filename.txt #? Delete -i to make it case insensitive"
+	 	],
+	 	"description": "Find All Lines in file that does not have given text in them"
+	 },
+	 "Count Lines in file": {
+	 	"prefix": "countLinesInFile",
+	 	"body": [
+	 		"awk 'END{print NR}' \"filename.txt\""
+	 	],
+	 	"description": "Count Lines in file"
+	 },
+	 "Count Lines in file that have given text": {
+	 	"prefix": "countLinesThatHaveGivenText",
+	 	"body": [
+	 		"variable1= grep -i -c \"text to find\" filename.txt #? Delete -i to make it case insensitive"
+	 	],
+	 	"description": "Count Lines in file has given text in them"
+	 },
+	 "Use Command Line Argument": {
+	 	"prefix": "userArgument",
+	 	"body": [
+	 		"args=(\"\\$@\") # Array of given in command-line before running script arguments",
+			"echo \"First given argument is: \\${args[0]}\"",
+			"echo \"Number of arguments: \\$#\""
+	 	],
+	 	"description": "Use Command Line Argument"
+	 },
+	 "User Given Command-Line Arguments": {
+	 	"prefix": "useGivenCommandLineArguments",
+	 	"body": [
+	 		"echo \"First given argument is: \\$1\""
+	 	],
+	 	"description": "User Given Command-Line Arguments"
+	 },
+
+	 // Logs--v
+	 "Create funciton for logs": {
+	 	"prefix": "logFunction",
+	 	"body": [
+	 		"log() {",
+    		"    echo 1>&2 \"\\$0 | \\$*\" #? \\$0 prints name of this script. \\$* prints given arguments",
+			"}"
+	 	],
+	 	"description": "Create funciton for logs"
+	 },
+	 // Logs--^
+
+
+
+
+
+
+	 
+	 // Internet--v
+	 "Download file": {
+	 	"prefix": "download",
+	 	"body": [
+	 		"curl 'https://raw.githubusercontent.com/GreatMedivack/files/master/list.out' -o \"filename.txt\""
+	 	],
+	 	"description": "Download file"
+	 },
+	 // Internet--^
+
+
+
+
+
+
+
+	 // User--v
+	 "Get username": {
+	 	"prefix": "getUsername",
+	 	"body": [
+	 		"username=\\$(id -un)"
+	 	],
+	 	"description": "username"
+	 },
+	 // User--^
+
+
+
+
+
+
+
+	 // Archive--v
+	 "Create archive": {
+	 	"prefix": "createArchive",
+	 	"body": [
+			"array_of_files_to_archive=(\"filename1.txt\" \"filename2.txt\")",
+	 		"tar -czf \"path to archive\" \"\\${array_of_files_to_archive[@]}\""
+	 	],
+	 	"description": "Create archive"
+	 },
+	 "Unpack archive": {
+	 	"prefix": "unpackArchive",
+	 	"body": [
+			"array_of_files_to_archive=(\"filename1.txt\" \"filename2.txt\")",
+	 		"tar -czf \"path to archive\" \"\\${array_of_files_to_archive[@]}\""
+	 	],
+	 	"description": "Unpack archive"
+	 },
+	 // Archive--^
+
+
+
+
+
+
+	 // Date --v
+	 "Get current date": {
+	 	"prefix": "getCurrentDate",
+	 	"body": [
+			"current_date=\\$(date '+%d_%m_%Y')"
+	 	],
+	 	"description": "Get current date"
+	 },
+	 // Date --^
+
+
+
+
+
+	 // Print
+	 "Print": {
+	 	"prefix": "print",
+	 	"body": [
+			"printf \"1st argument: %s, 2nd arguemtn: %s\" \"Lorem\" \"Ipsum\""
+	 	],
+	 	"description": "print"
+	 },
+	 // Print
+}
